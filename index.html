@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stopwatch</title>
+    <style>
+        body{background-color: rgb(39, 26, 26);
+            display:flex;
+            justify-content:center;
+            height:100vh;
+            align-items: center;
+
+        }
+        #container{color:#d7dfe4;}
+        .time{font-size: 150px;
+        font-weight:600;}
+        .text{font-size: 40px;
+        font-weight: bold;}
+        #btn_block{text-align: center;
+        margin-top: 30px;}
+        .btn{width:80px;
+        padding:7px 0px;
+        margin-left: 4px;
+        font-size: 15px;
+        color:white;
+        border:0px;}
+       #start{
+           background-color: rgb(56, 200, 56);
+       }
+       #stop{ background-color:rgba(40, 40, 198, 0.89)}
+       #reset{background-color:rgba(167, 38, 38, 0.787);}
+
+       @media only screen {
+        
+       }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="time_block">
+            <span class="time" id="hr">0</span>
+            <span class="text">Hr</span>
+            <span class="time" id="min">0</span>
+            <span class="text" >Min</span>
+            <span class="time" id="sec">0</span>
+            <span class="text">Sec</span>
+            <span class="time" id="ms">0</span>
+        </div>
+        <div id="btn_block">
+            <button class="btn" id="start">Start</button>
+            <button class="btn" id="stop">stop</button>
+            <button class="btn" id="reset">reset</button>
+        </div>
+    </div>
+    <script>
+        // default selector
+        var flag=false;
+        var count=0; 
+        var hour=0;
+        var minut=0;
+        var second=0;
+        var milisecond=0;
+
+
+
+        // all btn selector
+       let start_btn=document.querySelector("#start");
+       let stop_btn=document.querySelector("#stop");
+       let reset_btn=document.querySelector("#reset");
+
+
+        // all show time  filled selector
+        let hourElm=document.querySelector("#hr")
+        let minutElm=document.querySelector("#min")
+        let secElm=document.querySelector("#sec")
+        let mil_secElm=document.querySelector("#ms")
+
+
+        // all event listioner
+        start_btn.addEventListener("click",say);
+        stop_btn.addEventListener("click",stop);
+        reset_btn.addEventListener("click",reset);
+       function say(){
+            flag=true;
+            start();
+             
+       }
+         
+         function start(){
+            // reset();
+            if(flag==true){
+                    count++;
+                   if(count==100){
+                       second++;
+                       count=0;
+                    }
+                    if(second==60){
+                       minut++;
+                       second=0;
+                    }
+                   if(minut==60){
+                      hour++;
+                      minut=0
+                    }
+                 mil_secElm.innerHTML=count;
+                 secElm.innerHTML=second;
+                 minutElm.innerHTML=minut;
+                 hour.innerHTML=hour;
+                setTimeout("start()",10);
+            }
+            
+         }
+
+         function stop(){
+            flag=false;  
+         }
+
+         function reset(){
+            flag=true;
+            count=0;
+            milisecond=0;
+            second=0;
+            minut=0;
+            hour=0;
+            mil_secElm.innerHTML=0
+            secElm.innerHTML=0;
+            minutElm.innerHTML=0;
+            hour.innerHTML=0;
+         }
+    </script>
+</body>
+</html>
